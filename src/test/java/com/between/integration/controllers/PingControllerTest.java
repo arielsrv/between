@@ -1,4 +1,4 @@
-package com.between.integration;
+package com.between.integration.controllers;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -20,7 +20,7 @@ public class PriceControllerTest {
     private PriceController priceController;
 
     @BeforeEach
-    public  void setUp() {
+    public void setUp() {
         this.priceService = mock(PriceService.class);
         this.priceController = new PriceController(this.priceService);
     }

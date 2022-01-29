@@ -1,4 +1,4 @@
-package com.between.unit;
+package com.between.unit.controllers;
 
 import com.between.controllers.PingController;
 import org.junit.jupiter.api.Test;
