@@ -4,15 +4,15 @@ import com.between.dtos.PriceDto;
 import com.between.entities.Brand;
 import com.between.entities.Price;
 import com.between.entities.Product;
+import com.between.exceptions.ApiBadRequestException;
+import com.between.exceptions.ApiNotFoundException;
 import com.between.repositories.BrandRepository;
 import com.between.repositories.PriceRepository;
 import com.between.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
 
@@ -55,21 +55,21 @@ public class PriceService {
                 .getProduct(productId);
 
         if (!product.isPresent()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Product not found. ");
+            throw new ApiBadRequestException("Product not found. ");
         }
 
         Optional<Brand> brand = this.brandRepository
                 .getBrand(brandId);
 
         if (!brand.isPresent()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Brand not found. ");
+            throw new ApiBadRequestException("Brand not found. ");
         }
 
         Optional<Price> price = this.priceRepository
                 .getPrice(productId, brandId, applicationDate);
 
         if (!price.isPresent()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Offer not found. ");
+            throw new ApiNotFoundException("Offer not found. ");
         }
 
         PriceDto priceDto = mapToPriceDto(price.get());

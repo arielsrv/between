@@ -8,6 +8,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 
+import java.util.LinkedHashMap;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -83,5 +85,23 @@ public class PriceControllerTest {
         assertThat(actual.brandId).isEqualTo(1L);
         assertThat(actual.priceList).isEqualTo(4L);
         assertThat(actual.price).isEqualTo("38.95");
+    }
+
+    @Test
+    public void test_6() {
+        String url = this.apiUrl + "/prices/1?application_date=2020-06-16T21:00:00&brand_id=1";
+        LinkedHashMap<String, Object> actual = this.testRestTemplate.getForObject(url, LinkedHashMap.class);
+
+        assertThat(actual).isNotNull();
+        assertThat(actual.get("status")).isEqualTo(400);
+    }
+
+    @Test
+    public void test_7() {
+        String url = this.apiUrl + "/prices/1?application_date=2022-06-16T21:00:00&brand_id=1";
+        LinkedHashMap<String, Object> actual = this.testRestTemplate.getForObject(url, LinkedHashMap.class);
+
+        assertThat(actual).isNotNull();
+        assertThat(actual.get("status")).isEqualTo(404);
     }
 }
