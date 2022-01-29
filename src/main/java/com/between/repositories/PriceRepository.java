@@ -21,7 +21,7 @@ public class PriceRepository {
     }
 
     public Optional<Price> getPrice(Long productId, Long brandId, String applicationDate) {
-        return this.priceRepository.findTopByAndProductIdAndBrandIdAndStartDateBeforeAndEndDateAfter(
+        return this.priceRepository.findTopByAndProductIdAndBrandIdAndStartDateBeforeAndEndDateAfterOrderByPriorityDesc(
                 productId,
                 brandId,
                 LocalDateTime.parse(applicationDate),

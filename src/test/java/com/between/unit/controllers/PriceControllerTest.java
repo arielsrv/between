@@ -25,8 +25,8 @@ public class PriceControllerTest {
 
     @Test
     public void get_price() {
-        when(this.priceService.getPrice(1L, "2020-06-14T16:00:00", 1L)).thenReturn(getItem());
-        PriceDto actual = this.priceController.getPrice(1L, "2020-06-14T16:00:00", 1L);
+        when(this.priceService.getPrice(1L, "2020-06-14T10:00:00", 1L)).thenReturn(getItem());
+        PriceDto actual = this.priceController.getPrice(1L, "2020-06-14T10:00:00", 1L);
         assertThat(actual).isNotNull();
         assertThat(actual.productId).isEqualTo(1L);
     }

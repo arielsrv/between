@@ -30,7 +30,7 @@ public class Price {
     public Integer priority;
 
     @Column(name = "price", nullable = false)
-    public double price;
+    public String price;
 
     @Column(name = "curr", nullable = false)
     public String curr;

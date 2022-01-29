@@ -11,5 +11,5 @@ public class PriceDto {
     public Integer priority;
     public String currency;
     public Long productId;
-    public double price;
+    public String price;
 }

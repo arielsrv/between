@@ -15,7 +15,7 @@ import java.util.Optional;
 @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
 public interface IPriceRepository extends CrudRepository<Price, Long> {
 
-    Optional<Price> findTopByAndProductIdAndBrandIdAndStartDateBeforeAndEndDateAfter(
+    Optional<Price> findTopByAndProductIdAndBrandIdAndStartDateBeforeAndEndDateAfterOrderByPriorityDesc(
             Long productId,
             Long brandId,
             LocalDateTime applicationDate1,
