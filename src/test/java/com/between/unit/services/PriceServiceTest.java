@@ -74,6 +74,7 @@ public class PriceServiceTest {
     private Optional<Brand> getBrand() {
         Brand brand = new Brand();
         brand.id = 1L;
+        brand.title = "ZARA";
         return Optional.of(brand);
     }
 
