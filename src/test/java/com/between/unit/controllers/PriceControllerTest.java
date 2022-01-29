@@ -1,9 +1,8 @@
-package com.between.unit.services;
+package com.between.unit.controllers;
 
 import com.between.controllers.PriceController;
 import com.between.dtos.PriceDto;
 import com.between.services.PriceService;
-import org.hibernate.cache.spi.support.AbstractReadWriteAccess;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,13 +20,13 @@ public class PriceControllerTest {
     private PriceController priceController;
 
     @BeforeEach
-    void setUp() {
+    public  void setUp() {
         this.priceService = mock(PriceService.class);
         this.priceController = new PriceController(this.priceService);
     }
 
     @Test
-    void get_item_ok() {
+    public void get_all() {
         when(this.priceService.getAll()).thenReturn(getItems());
         ArrayList<PriceDto> actual = this.priceController.getAll();
         assertThat(actual).isNotNull();
