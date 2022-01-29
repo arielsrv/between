@@ -7,8 +7,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.ArrayList;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -26,23 +24,16 @@ public class PriceControllerTest {
     }
 
     @Test
-    public void get_all() {
-        when(this.priceService.getAll()).thenReturn(getItems());
-        ArrayList<PriceDto> actual = this.priceController.getAll();
+    public void get_price() {
+        when(this.priceService.getPrice(1L, "2020-06-14T16:00:00", 1L)).thenReturn(getItem());
+        PriceDto actual = this.priceController.getPrice(1L, "2020-06-14T16:00:00", 1L);
         assertThat(actual).isNotNull();
-        assertThat(actual).isNotEmpty();
-        assertThat(actual.stream().findFirst().isPresent()).isTrue();
-        assertThat(actual.stream().findFirst().get().productId).isEqualTo(1L);
+        assertThat(actual.productId).isEqualTo(1L);
     }
 
-    private ArrayList<PriceDto> getItems() {
-        ArrayList<PriceDto> priceDtos = new ArrayList<>();
-
+    private PriceDto getItem() {
         PriceDto priceDto = new PriceDto();
         priceDto.productId = 1L;
-
-        priceDtos.add(priceDto);
-
-        return priceDtos;
+        return priceDto;
     }
 }

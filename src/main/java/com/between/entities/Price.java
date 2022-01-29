@@ -11,27 +11,27 @@ public class Price {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
-    @Column(name = "brand_id")
+    @Column(name = "brand_id", nullable = false)
     public Long brandId;
 
-    @Column(name = "start_date")
+    @Column(name = "start_date", nullable = false)
     public LocalDateTime startDate;
 
-    @Column(name = "end_date")
+    @Column(name = "end_date", nullable = false)
     public LocalDateTime endDate;
 
-    @Column(name = "price_list")
+    @Column(name = "price_list", nullable = false)
     public Integer priceList;
 
-    @Column(name = "product_id")
+    @Column(name = "product_id", nullable = false)
     public Long productId;
 
-    @Column(name = "priority")
+    @Column(name = "priority", nullable = false)
     public Integer priority;
 
-    @Column(name = "price")
+    @Column(name = "price", nullable = false)
     public double price;
 
-    @Column(name = "curr")
+    @Column(name = "curr", nullable = false)
     public String curr;
 }
