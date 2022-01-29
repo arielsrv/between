@@ -19,9 +19,9 @@ public class PriceController {
     @RequestMapping(value = "/{product_id}", method = RequestMethod.GET)
     public @ResponseBody
     PriceDto getPrice(
-            @PathVariable("product_id") Long productId,
+            @PathVariable("product_id") long productId,
             @RequestParam("application_date") String applicationDate,
-            @RequestParam("brand_id") Long brandId
+            @RequestParam("brand_id") long brandId
     ) {
         return this.priceService.getPrice(productId, applicationDate, brandId);
     }

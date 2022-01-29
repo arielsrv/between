@@ -16,8 +16,8 @@ import java.util.Optional;
 public interface IPriceRepository extends CrudRepository<Price, Long> {
 
     Optional<Price> findTopByAndProductIdAndBrandIdAndStartDateBeforeAndEndDateAfterOrderByPriorityDesc(
-            Long productId,
-            Long brandId,
+            long productId,
+            long brandId,
             LocalDateTime applicationDate1,
             LocalDateTime applicationDate2);
 }

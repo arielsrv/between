@@ -3,13 +3,13 @@ package com.between.dtos;
 import java.time.LocalDateTime;
 
 public class PriceDto {
-    public Long id;
+    public long id;
     public LocalDateTime startDate;
     public LocalDateTime endDate;
-    public Long brandId;
-    public Integer priceList;
-    public Integer priority;
+    public long brandId;
+    public int priceList;
+    public int priority;
     public String currency;
-    public Long productId;
+    public long productId;
     public String price;
 }

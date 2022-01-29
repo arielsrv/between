@@ -9,10 +9,11 @@ public class Price {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
+    public long id;
 
-    @Column(name = "brand_id", nullable = false)
-    public Long brandId;
+    @ManyToOne()
+    @JoinColumn(name = "brand_id")
+    public Brand brand;
 
     @Column(name = "start_date", nullable = false)
     public LocalDateTime startDate;
@@ -21,13 +22,14 @@ public class Price {
     public LocalDateTime endDate;
 
     @Column(name = "price_list", nullable = false)
-    public Integer priceList;
+    public int priceList;
 
-    @Column(name = "product_id", nullable = false)
-    public Long productId;
+    @ManyToOne()
+    @JoinColumn(name = "product_id")
+    public Product product;
 
     @Column(name = "priority", nullable = false)
-    public Integer priority;
+    public int priority;
 
     @Column(name = "price", nullable = false)
     public String price;

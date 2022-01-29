@@ -20,7 +20,7 @@ public class PriceRepository {
         this.priceRepository = priceRepository;
     }
 
-    public Optional<Price> getPrice(Long productId, Long brandId, String applicationDate) {
+    public Optional<Price> getPrice(long productId, long brandId, String applicationDate) {
         return this.priceRepository.findTopByAndProductIdAndBrandIdAndStartDateBeforeAndEndDateAfterOrderByPriorityDesc(
                 productId,
                 brandId,
