@@ -68,7 +68,7 @@ public class PriceService {
 		priceDto.endDate = price.endDate;
 		priceDto.brandId = price.brand.id;
 		priceDto.priceList = price.priceList;
-		priceDto.currency = price.curr;
+		priceDto.currency = price.curr.toString();
 		priceDto.productId = price.product.id;
 		priceDto.price = price.price;
 		return priceDto;

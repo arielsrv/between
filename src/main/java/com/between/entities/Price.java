@@ -35,5 +35,7 @@ public class Price {
 	public String price;
 
 	@Column(name = "curr", nullable = false)
-	public String curr;
+	@Enumerated(value = EnumType.STRING)
+	public Currency curr;
 }
+

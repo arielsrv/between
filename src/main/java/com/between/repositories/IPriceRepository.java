@@ -1,12 +1,15 @@
 package com.between.repositories;
 
 import com.between.entities.Price;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManager;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -14,6 +17,7 @@ import java.util.Optional;
 @Component
 @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
 public interface IPriceRepository extends CrudRepository<Price, Long> {
+
 
 	Optional<Price> findTopByAndProductIdAndBrandIdAndStartDateBeforeAndEndDateAfterOrderByPriorityDesc(
 		long productId,

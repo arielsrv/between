@@ -2,6 +2,7 @@ package com.between.unit.services;
 
 import com.between.dtos.PriceDto;
 import com.between.entities.Brand;
+import com.between.entities.Currency;
 import com.between.entities.Price;
 import com.between.entities.Product;
 import com.between.exceptions.ApiNotFoundException;
@@ -66,6 +67,7 @@ public class PriceServiceTest {
 		price.brand = new Brand();
 		price.brand.id = 1L;
 		price.price = "20.00";
+		price.curr = Currency.EUR;
 		return Optional.of(price);
 	}
 
