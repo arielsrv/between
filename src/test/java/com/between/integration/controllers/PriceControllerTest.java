@@ -98,7 +98,7 @@ public class PriceControllerTest {
 
 	@Test
 	public void test_brand_not_found() {
-		String url = this.apiUrl + "/prices/1?application_date=2020-06-16T21:00:00&brand_id=5";
+		String url = this.apiUrl + "/prices/35455?application_date=2020-06-16T21:00:00&brand_id=5";
 		LinkedHashMap<String, Object> actual = this.testRestTemplate.getForObject(url, LinkedHashMap.class);
 
 		assertThat(actual).isNotNull();
