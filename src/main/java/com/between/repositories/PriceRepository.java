@@ -21,11 +21,8 @@ public class PriceRepository {
     }
 
     public Optional<Price> getPrice(long productId, long brandId, String applicationDate) {
-        return this.priceRepository.findTopByAndProductIdAndBrandIdAndStartDateBeforeAndEndDateAfterOrderByPriorityDesc(
-                productId,
-                brandId,
-                LocalDateTime.parse(applicationDate),
-                LocalDateTime.parse(applicationDate)
-        );
+        return this.priceRepository.getPriceByApplicationDate( productId,
+			brandId,
+			LocalDateTime.parse(applicationDate));
     }
 }

@@ -104,4 +104,13 @@ public class PriceControllerTest {
 		assertThat(actual).isNotNull();
 		assertThat(actual.get("status")).isEqualTo(404);
 	}
+
+
+	@Test
+	public void get_foo() {
+		String url = this.apiUrl + "/prices/35455?application_date=2020-06-16T21:00:00&brand_id=1";
+		PriceDto actual = this.testRestTemplate.getForObject(url, PriceDto.class);
+
+		assertThat(actual).isNotNull();
+	}
 }
