@@ -5,7 +5,7 @@
 
 ## Request
 
-    curl 'https://between-challenge.herokuapp.com//prices/35455?application_date=2020-06-14T16:00:01&brand_id=1'
+    curl 'https://between-challenge.herokuapp.com/prices/35455?application_date=2020-06-14T16:00:01&brand_id=1'
 
 ## Responses
 
