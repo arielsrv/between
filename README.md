@@ -3,6 +3,19 @@
 [![Java CI with Gradle](https://github.com/arielsrv/between/actions/workflows/gradle.yml/badge.svg)](https://github.com/arielsrv/between/actions/workflows/gradle.yml)
 [![Coverage](.github/badges/jacoco.svg)](https://github.com/arielsrv/between/actions/workflows/gradle.yml)
 
+## running
+
+    ./gradlew run
+
+## building
+
+    ./gradlew build
+
+## coverage
+
+    ./gradlew test jacocoTestReport
+
+
 ## Request
 
     curl 'https://between-challenge.herokuapp.com/prices/search?product_id=35455&application_date=2020-06-14T16:00:01&brand_id=1'
