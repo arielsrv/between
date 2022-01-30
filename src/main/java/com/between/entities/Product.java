@@ -15,3 +15,4 @@ public class Product {
 	@Column(name = "title", nullable = false)
 	public String title;
 }
+
