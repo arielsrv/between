@@ -16,10 +16,10 @@ public class PriceController {
 		this.priceService = priceService;
 	}
 
-	@RequestMapping(value = "/{product_id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public @ResponseBody
 	PriceDto getPrice(
-		@PathVariable("product_id") long productId,
+		@RequestParam("product_id") long productId,
 		@RequestParam("application_date") String applicationDate,
 		@RequestParam("brand_id") long brandId
 	) {

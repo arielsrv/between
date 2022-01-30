@@ -41,14 +41,14 @@ public class PriceService {
 			.getProduct(productId);
 
 		if (!product.isPresent()) {
-			throw new ApiBadRequestException("Product not found. ");
+			throw new ApiNotFoundException("Product not found. ");
 		}
 
 		Optional<Brand> brand = this.brandRepository
 			.getBrand(brandId);
 
 		if (!brand.isPresent()) {
-			throw new ApiBadRequestException("Brand not found. ");
+			throw new ApiNotFoundException("Brand not found. ");
 		}
 
 		Optional<Price> price = this.priceRepository
