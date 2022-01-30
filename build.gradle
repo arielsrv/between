@@ -10,6 +10,7 @@ plugins {
 group = 'com.between'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
+mainClassName = 'com.between.Program'
 
 repositories {
     mavenCentral()
