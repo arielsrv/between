@@ -9,20 +9,20 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "prices")
 public class PriceController {
 
-    public final PriceService priceService;
+	public final PriceService priceService;
 
-    @Autowired
-    public PriceController(PriceService priceService) {
-        this.priceService = priceService;
-    }
+	@Autowired
+	public PriceController(PriceService priceService) {
+		this.priceService = priceService;
+	}
 
-    @RequestMapping(value = "/{product_id}", method = RequestMethod.GET)
-    public @ResponseBody
-    PriceDto getPrice(
-            @PathVariable("product_id") long productId,
-            @RequestParam("application_date") String applicationDate,
-            @RequestParam("brand_id") long brandId
-    ) {
-        return this.priceService.getPrice(productId, applicationDate, brandId);
-    }
+	@RequestMapping(value = "/{product_id}", method = RequestMethod.GET)
+	public @ResponseBody
+	PriceDto getPrice(
+		@PathVariable("product_id") long productId,
+		@RequestParam("application_date") String applicationDate,
+		@RequestParam("brand_id") long brandId
+	) {
+		return this.priceService.getPrice(productId, applicationDate, brandId);
+	}
 }

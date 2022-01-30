@@ -20,58 +20,59 @@ import java.util.Optional;
 @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
 public class PriceService {
 
-    public final BrandRepository brandRepository;
-    public final ProductRepository productRepository;
-    public final PriceRepository priceRepository;
+	public final BrandRepository brandRepository;
+	public final ProductRepository productRepository;
+	public final PriceRepository priceRepository;
 
-    @Autowired
-    public PriceService(
-            ProductRepository productRepository,
-            BrandRepository brandRepository,
-            PriceRepository priceRepository
-    ) {
-        this.productRepository = productRepository;
-        this.brandRepository = brandRepository;
-        this.priceRepository = priceRepository;
-    }
+	@Autowired
+	public PriceService(
+		ProductRepository productRepository,
+		BrandRepository brandRepository,
+		PriceRepository priceRepository
+	) {
+		this.productRepository = productRepository;
+		this.brandRepository = brandRepository;
+		this.priceRepository = priceRepository;
+	}
 
-    private PriceDto mapToPriceDto(Price price) {
-        PriceDto priceDto = new PriceDto();
-        priceDto.id = price.id;
-        priceDto.startDate = price.startDate;
-        priceDto.endDate = price.endDate;
-        priceDto.brandId = price.brand.id;
-        priceDto.priceList = price.priceList;
-        priceDto.priority = price.priority;
-        priceDto.currency = price.curr;
-        priceDto.productId = price.product.id;
-        priceDto.price = price.price;
-        return priceDto;
-    }
+	public PriceDto getPrice(long productId, String applicationDate, long brandId) {
 
-    public PriceDto getPrice(long productId, String applicationDate, long brandId) {
+		Optional<Product> product = this.productRepository
+			.getProduct(productId);
 
-        Optional<Product> product = this.productRepository
-                .getProduct(productId);
+		if (!product.isPresent()) {
+			throw new ApiBadRequestException("Product not found. ");
+		}
 
-        if (!product.isPresent()) {
-            throw new ApiBadRequestException("Product not found. ");
-        }
+		Optional<Brand> brand = this.brandRepository
+			.getBrand(brandId);
 
-        Optional<Brand> brand = this.brandRepository
-                .getBrand(brandId);
+		if (!brand.isPresent()) {
+			throw new ApiBadRequestException("Brand not found. ");
+		}
 
-        if (!brand.isPresent()) {
-            throw new ApiBadRequestException("Brand not found. ");
-        }
+		Optional<Price> price = this.priceRepository
+			.getPrice(productId, brandId, applicationDate);
 
-        Optional<Price> price = this.priceRepository
-                .getPrice(productId, brandId, applicationDate);
+		if (!price.isPresent()) {
+			throw new ApiNotFoundException("Offer not found. ");
+		}
 
-        if (!price.isPresent()) {
-            throw new ApiNotFoundException("Offer not found. ");
-        }
+		return this.mapToPriceDto(price.get());
+	}
 
-        return mapToPriceDto(price.get());
-    }
+
+	private PriceDto mapToPriceDto(Price price) {
+		PriceDto priceDto = new PriceDto();
+		priceDto.id = price.id;
+		priceDto.startDate = price.startDate;
+		priceDto.endDate = price.endDate;
+		priceDto.brandId = price.brand.id;
+		priceDto.priceList = price.priceList;
+		priceDto.priority = price.priority;
+		priceDto.currency = price.curr;
+		priceDto.productId = price.product.id;
+		priceDto.price = price.price;
+		return priceDto;
+	}
 }

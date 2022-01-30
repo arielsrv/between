@@ -5,7 +5,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 public class ApiBadRequestException extends ResponseStatusException {
 
-    public ApiBadRequestException(String message) {
-        super(HttpStatus.BAD_REQUEST, message);
-    }
+	public ApiBadRequestException(String message) {
+		super(HttpStatus.BAD_REQUEST, message);
+	}
 }

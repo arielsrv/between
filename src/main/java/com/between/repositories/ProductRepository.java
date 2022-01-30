@@ -12,14 +12,14 @@ import java.util.Optional;
 @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
 public class ProductRepository {
 
-    final IProductRepository productRepository;
+	final IProductRepository productRepository;
 
-    @Autowired
-    public ProductRepository(IProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
+	@Autowired
+	public ProductRepository(IProductRepository productRepository) {
+		this.productRepository = productRepository;
+	}
 
-    public Optional<Product> getProduct(long productId) {
-        return this.productRepository.findById(productId);
-    }
+	public Optional<Product> getProduct(long productId) {
+		return this.productRepository.findById(productId);
+	}
 }

@@ -19,34 +19,33 @@ import org.springframework.context.annotation.Primary;
 @SpringBootApplication
 public class Program {
 
-    public static void main(String[] args) {
-        SpringApplication.run(Program.class, args);
-    }
+	public static void main(String[] args) {
+		SpringApplication.run(Program.class, args);
+	}
 
-    @Bean
-    @Primary
-    public ObjectMapper objectMapper() {
+	@Bean
+	@Primary
+	public ObjectMapper objectMapper() {
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        objectMapper.setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE);
-        objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
+		ObjectMapper objectMapper = new ObjectMapper();
+		objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		objectMapper.setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE);
+		objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
 
+		// visibility
+		objectMapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.NONE);
+		objectMapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
 
-        // visibility
-        objectMapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.NONE);
-        objectMapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
+		// ISO 8601 date format
+		objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+		objectMapper.setDateFormat(new StdDateFormat());
 
-        // ISO 8601 date format
-        objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-        objectMapper.setDateFormat(new StdDateFormat());
+		// Java 8 support
+		objectMapper.registerModule(new ParameterNamesModule());
+		objectMapper.registerModule(new Jdk8Module());
+		objectMapper.registerModule(new JavaTimeModule());
 
-        // Java 8 support
-        objectMapper.registerModule(new ParameterNamesModule());
-        objectMapper.registerModule(new Jdk8Module());
-        objectMapper.registerModule(new JavaTimeModule());
-
-        return objectMapper;
-    }
+		return objectMapper;
+	}
 }

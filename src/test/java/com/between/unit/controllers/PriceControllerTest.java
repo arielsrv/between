@@ -14,34 +14,34 @@ import static org.mockito.Mockito.when;
 
 public class PriceControllerTest {
 
-    private PriceService priceService;
-    private PriceController priceController;
+	private PriceService priceService;
+	private PriceController priceController;
 
-    @BeforeEach
-    public void setUp() {
-        this.priceService = mock(PriceService.class);
-        this.priceController = new PriceController(this.priceService);
-    }
+	@BeforeEach
+	public void setUp() {
+		this.priceService = mock(PriceService.class);
+		this.priceController = new PriceController(this.priceService);
+	}
 
-    @Test
-    public void get_price() {
-        when(this.priceService.getPrice(1L, "2020-06-14T10:00:00", 1L)).thenReturn(getItem());
-        PriceDto actual = this.priceController.getPrice(1L, "2020-06-14T10:00:00", 1L);
-        assertThat(actual).isNotNull();
-        assertThat(actual.productId).isEqualTo(1L);
-    }
+	@Test
+	public void get_price() {
+		when(this.priceService.getPrice(1L, "2020-06-14T10:00:00", 1L)).thenReturn(getItem());
+		PriceDto actual = this.priceController.getPrice(1L, "2020-06-14T10:00:00", 1L);
+		assertThat(actual).isNotNull();
+		assertThat(actual.productId).isEqualTo(1L);
+	}
 
-    @Test
-    public void get_price_not_found() {
-        when(this.priceService.getPrice(1L, "2022-06-14T10:00:00", 1L))
-                .thenThrow(new ApiNotFoundException("Price not found. "));
+	@Test
+	public void get_price_not_found() {
+		when(this.priceService.getPrice(1L, "2022-06-14T10:00:00", 1L))
+			.thenThrow(new ApiNotFoundException("Price not found. "));
 
-        assertThrows(ApiNotFoundException.class, () -> this.priceController.getPrice(1L, "2022-06-14T10:00:00", 1L));
-    }
+		assertThrows(ApiNotFoundException.class, () -> this.priceController.getPrice(1L, "2022-06-14T10:00:00", 1L));
+	}
 
-    private PriceDto getItem() {
-        PriceDto priceDto = new PriceDto();
-        priceDto.productId = 1L;
-        return priceDto;
-    }
+	private PriceDto getItem() {
+		PriceDto priceDto = new PriceDto();
+		priceDto.productId = 1L;
+		return priceDto;
+	}
 }

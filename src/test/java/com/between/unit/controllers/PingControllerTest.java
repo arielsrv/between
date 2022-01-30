@@ -7,11 +7,11 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class PingControllerTest {
 
-    @Test
-    public void ping() {
-        PingController pingController = new PingController();
-        String actual = pingController.pong();
+	@Test
+	public void ping() {
+		PingController pingController = new PingController();
+		String actual = pingController.pong();
 
-        assertThat(actual).isEqualTo("pong");
-    }
+		assertThat(actual).isEqualTo("pong");
+	}
 }

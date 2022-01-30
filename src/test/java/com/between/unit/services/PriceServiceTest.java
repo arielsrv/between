@@ -23,62 +23,62 @@ import static org.mockito.Mockito.when;
 @SpringBootTest
 public class PriceServiceTest {
 
-    private ProductRepository productRepository;
-    private BrandRepository brandRepository;
-    private PriceRepository priceRepository;
-    private PriceService priceService;
+	private ProductRepository productRepository;
+	private BrandRepository brandRepository;
+	private PriceRepository priceRepository;
+	private PriceService priceService;
 
-    @BeforeEach
-    public void setUp() {
-        this.productRepository = mock(ProductRepository.class);
-        this.brandRepository = mock(BrandRepository.class);
-        this.priceRepository = mock(PriceRepository.class);
-        this.priceService = new PriceService(
-                this.productRepository,
-                this.brandRepository,
-                this.priceRepository
-        );
-    }
+	@BeforeEach
+	public void setUp() {
+		this.productRepository = mock(ProductRepository.class);
+		this.brandRepository = mock(BrandRepository.class);
+		this.priceRepository = mock(PriceRepository.class);
+		this.priceService = new PriceService(
+			this.productRepository,
+			this.brandRepository,
+			this.priceRepository
+		);
+	}
 
-    @Test
-    public void get_price() {
-        when(this.productRepository.getProduct(1L)).thenReturn(getProduct());
-        when(this.brandRepository.getBrand(1L)).thenReturn(getBrand());
-        when(this.priceRepository.getPrice(1L, 1L, "2020-06-14T16:00:00")).thenReturn(getPrice());
+	@Test
+	public void get_price() {
+		when(this.productRepository.getProduct(1L)).thenReturn(getProduct());
+		when(this.brandRepository.getBrand(1L)).thenReturn(getBrand());
+		when(this.priceRepository.getPrice(1L, 1L, "2020-06-14T16:00:00")).thenReturn(getPrice());
 
-        PriceDto actual = this.priceService.getPrice(1L, "2020-06-14T16:00:00", 1L);
-        assertThat(actual).isNotNull();
-    }
+		PriceDto actual = this.priceService.getPrice(1L, "2020-06-14T16:00:00", 1L);
+		assertThat(actual).isNotNull();
+	}
 
-    @Test
-    public void get_price_not_found() {
-        when(this.productRepository.getProduct(1L)).thenReturn(getProduct());
-        when(this.brandRepository.getBrand(1L)).thenReturn(getBrand());
-        when(this.priceRepository.getPrice(1L, 1L, "2020-06-14T16:00:00")).thenThrow(new ApiNotFoundException("Price not found. "));
+	@Test
+	public void get_price_not_found() {
+		when(this.productRepository.getProduct(1L)).thenReturn(getProduct());
+		when(this.brandRepository.getBrand(1L)).thenReturn(getBrand());
+		when(this.priceRepository.getPrice(1L, 1L, "2020-06-14T16:00:00")).thenThrow(new ApiNotFoundException("Price not found. "));
 
-        assertThrows(ApiNotFoundException.class, () -> this.priceService.getPrice(1L, "2020-06-14T16:00:00", 1L));
-    }
+		assertThrows(ApiNotFoundException.class, () -> this.priceService.getPrice(1L, "2020-06-14T16:00:00", 1L));
+	}
 
-    private Optional<Price> getPrice() {
-        Price price = new Price();
-        price.product = new Product();
-        price.product.id = 1L;
-        price.brand = new Brand();
-        price.brand.id = 1L;
-        price.price = "20.00";
-        return Optional.of(price);
-    }
+	private Optional<Price> getPrice() {
+		Price price = new Price();
+		price.product = new Product();
+		price.product.id = 1L;
+		price.brand = new Brand();
+		price.brand.id = 1L;
+		price.price = "20.00";
+		return Optional.of(price);
+	}
 
-    private Optional<Brand> getBrand() {
-        Brand brand = new Brand();
-        brand.id = 1L;
-        brand.title = "ZARA";
-        return Optional.of(brand);
-    }
+	private Optional<Brand> getBrand() {
+		Brand brand = new Brand();
+		brand.id = 1L;
+		brand.title = "ZARA";
+		return Optional.of(brand);
+	}
 
-    private Optional<Product> getProduct() {
-        Product product = new Product();
-        product.id = 1L;
-        return Optional.of(product);
-    }
+	private Optional<Product> getProduct() {
+		Product product = new Product();
+		product.id = 1L;
+		return Optional.of(product);
+	}
 }

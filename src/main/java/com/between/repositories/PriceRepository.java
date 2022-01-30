@@ -13,19 +13,19 @@ import java.util.Optional;
 @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
 public class PriceRepository {
 
-    public final IPriceRepository priceRepository;
+	public final IPriceRepository priceRepository;
 
-    @Autowired
-    public PriceRepository(IPriceRepository priceRepository) {
-        this.priceRepository = priceRepository;
-    }
+	@Autowired
+	public PriceRepository(IPriceRepository priceRepository) {
+		this.priceRepository = priceRepository;
+	}
 
-    public Optional<Price> getPrice(long productId, long brandId, String applicationDate) {
-        return this.priceRepository.findTopByAndProductIdAndBrandIdAndStartDateBeforeAndEndDateAfterOrderByPriorityDesc(
-                productId,
-                brandId,
-                LocalDateTime.parse(applicationDate),
-                LocalDateTime.parse(applicationDate)
-        );
-    }
+	public Optional<Price> getPrice(long productId, long brandId, String applicationDate) {
+		return this.priceRepository.findTopByAndProductIdAndBrandIdAndStartDateBeforeAndEndDateAfterOrderByPriorityDesc(
+			productId,
+			brandId,
+			LocalDateTime.parse(applicationDate),
+			LocalDateTime.parse(applicationDate)
+		);
+	}
 }

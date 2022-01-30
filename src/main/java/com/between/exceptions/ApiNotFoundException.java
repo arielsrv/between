@@ -5,8 +5,8 @@ import org.springframework.web.server.ResponseStatusException;
 
 public class ApiNotFoundException extends ResponseStatusException {
 
-    public ApiNotFoundException(String message) {
-        super(HttpStatus.NOT_FOUND, message);
-    }
+	public ApiNotFoundException(String message) {
+		super(HttpStatus.NOT_FOUND, message);
+	}
 }
 

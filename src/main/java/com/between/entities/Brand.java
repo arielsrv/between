@@ -9,9 +9,9 @@ import javax.persistence.Table;
 @Table(name = "brands")
 public class Brand {
 
-    @Id
-    public long id;
+	@Id
+	public long id;
 
-    @Column(name = "title", nullable = false)
-    public String title;
+	@Column(name = "title", nullable = false)
+	public String title;
 }

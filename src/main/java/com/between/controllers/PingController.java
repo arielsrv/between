@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class PingController {
 
-    @RequestMapping(value = "/ping", method = RequestMethod.GET)
-    public @ResponseBody
-    String pong() {
-        return "pong";
-    }
+	@RequestMapping(value = "/ping", method = RequestMethod.GET)
+	public @ResponseBody
+	String pong() {
+		return "pong";
+	}
 }

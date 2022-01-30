@@ -12,23 +12,23 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class PingControllerTest {
 
-    @LocalServerPort
-    private int port;
+	@LocalServerPort
+	private int port;
 
-    @Autowired
-    private TestRestTemplate testRestTemplate;
-    private String apiUrl;
+	@Autowired
+	private TestRestTemplate testRestTemplate;
+	private String apiUrl;
 
-    @BeforeEach
-    public void setUp() {
-        this.apiUrl = String.format("http://localhost:%d", port);
-    }
+	@BeforeEach
+	public void setUp() {
+		this.apiUrl = String.format("http://localhost:%d", port);
+	}
 
-    @Test
-    public void ping() {
-        String url = this.apiUrl + "/ping";
-        String actual = this.testRestTemplate.getForObject(url, String.class);
+	@Test
+	public void ping() {
+		String url = this.apiUrl + "/ping";
+		String actual = this.testRestTemplate.getForObject(url, String.class);
 
-        assertThat(actual).isEqualTo("pong");
-    }
+		assertThat(actual).isEqualTo("pong");
+	}
 }

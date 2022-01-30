@@ -14,30 +14,30 @@ import static org.mockito.Mockito.when;
 
 public class ProductRepositoryTest {
 
-    private IProductRepository productProxyRepository;
-    private ProductRepository productRepository;
+	private IProductRepository productProxyRepository;
+	private ProductRepository productRepository;
 
-    @BeforeEach
-    public void setUp() {
-        this.productProxyRepository = mock(IProductRepository.class);
-        this.productRepository = new ProductRepository(productProxyRepository);
-    }
+	@BeforeEach
+	public void setUp() {
+		this.productProxyRepository = mock(IProductRepository.class);
+		this.productRepository = new ProductRepository(productProxyRepository);
+	}
 
-    @Test
-    public void get_price() {
-        when(this.productProxyRepository.findById(1L)).thenReturn(getProduct());
-        Optional<Product> actual = this.productRepository.getProduct(1L);
+	@Test
+	public void get_price() {
+		when(this.productProxyRepository.findById(1L)).thenReturn(getProduct());
+		Optional<Product> actual = this.productRepository.getProduct(1L);
 
-        assertThat(actual).isNotNull();
-        assertThat(actual.isPresent()).isTrue();
-        assertThat(actual.get().id).isEqualTo(1L);
-        assertThat(actual.get().title).isEqualTo("iphone");
-    }
+		assertThat(actual).isNotNull();
+		assertThat(actual.isPresent()).isTrue();
+		assertThat(actual.get().id).isEqualTo(1L);
+		assertThat(actual.get().title).isEqualTo("iphone");
+	}
 
-    private Optional<Product> getProduct() {
-        Product product = new Product();
-        product.id = 1L;
-        product.title = "iphone";
-        return Optional.of(product);
-    }
+	private Optional<Product> getProduct() {
+		Product product = new Product();
+		product.id = 1L;
+		product.title = "iphone";
+		return Optional.of(product);
+	}
 }
