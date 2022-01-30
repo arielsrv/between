@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "prices")
 public class PriceController {
 
-    public PriceService priceService;
+    public final PriceService priceService;
 
     @Autowired
     public PriceController(PriceService priceService) {

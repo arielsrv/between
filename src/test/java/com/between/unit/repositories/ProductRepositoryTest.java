@@ -20,16 +20,16 @@ public class ProductRepositoryTest {
     @BeforeEach
     public void setUp() {
         this.productProxyRepository = mock(IProductRepository.class);
-        this.productRepository = new ProductRepository(this.productProxyRepository);
+        this.productRepository = new ProductRepository(productProxyRepository);
     }
 
     @Test
     public void get_price() {
-        when(this.productRepository.getProduct(1L)).thenReturn(getProduct());
+        when(this.productProxyRepository.findById(1L)).thenReturn(getProduct());
         Optional<Product> actual = this.productRepository.getProduct(1L);
 
         assertThat(actual).isNotNull();
-        assertThat(actual.isPresent());
+        assertThat(actual.isPresent()).isTrue();
         assertThat(actual.get().id).isEqualTo(1L);
         assertThat(actual.get().title).isEqualTo("iphone");
     }

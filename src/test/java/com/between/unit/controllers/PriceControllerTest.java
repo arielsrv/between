@@ -36,9 +36,7 @@ public class PriceControllerTest {
         when(this.priceService.getPrice(1L, "2022-06-14T10:00:00", 1L))
                 .thenThrow(new ApiNotFoundException("Price not found. "));
 
-        assertThrows(ApiNotFoundException.class, () -> {
-            this.priceController.getPrice(1L, "2022-06-14T10:00:00", 1L);
-        });
+        assertThrows(ApiNotFoundException.class, () -> this.priceController.getPrice(1L, "2022-06-14T10:00:00", 1L));
     }
 
     private PriceDto getItem() {

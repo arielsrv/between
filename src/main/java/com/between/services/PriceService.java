@@ -20,9 +20,9 @@ import java.util.Optional;
 @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
 public class PriceService {
 
-    public BrandRepository brandRepository;
-    public ProductRepository productRepository;
-    public PriceRepository priceRepository;
+    public final BrandRepository brandRepository;
+    public final ProductRepository productRepository;
+    public final PriceRepository priceRepository;
 
     @Autowired
     public PriceService(
@@ -72,8 +72,6 @@ public class PriceService {
             throw new ApiNotFoundException("Offer not found. ");
         }
 
-        PriceDto priceDto = mapToPriceDto(price.get());
-
-        return priceDto;
+        return mapToPriceDto(price.get());
     }
 }

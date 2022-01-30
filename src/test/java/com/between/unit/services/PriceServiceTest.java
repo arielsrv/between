@@ -56,9 +56,7 @@ public class PriceServiceTest {
         when(this.brandRepository.getBrand(1L)).thenReturn(getBrand());
         when(this.priceRepository.getPrice(1L, 1L, "2020-06-14T16:00:00")).thenThrow(new ApiNotFoundException("Price not found. "));
 
-        assertThrows(ApiNotFoundException.class, () -> {
-            this.priceService.getPrice(1L, "2020-06-14T16:00:00", 1L);
-        });
+        assertThrows(ApiNotFoundException.class, () -> this.priceService.getPrice(1L, "2020-06-14T16:00:00", 1L));
     }
 
     private Optional<Price> getPrice() {

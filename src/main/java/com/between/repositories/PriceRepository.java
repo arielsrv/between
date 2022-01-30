@@ -13,7 +13,7 @@ import java.util.Optional;
 @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
 public class PriceRepository {
 
-    public IPriceRepository priceRepository;
+    public final IPriceRepository priceRepository;
 
     @Autowired
     public PriceRepository(IPriceRepository priceRepository) {
