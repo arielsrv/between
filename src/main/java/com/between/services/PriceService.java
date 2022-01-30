@@ -64,12 +64,10 @@ public class PriceService {
 
 	private PriceDto mapToPriceDto(Price price) {
 		PriceDto priceDto = new PriceDto();
-		priceDto.id = price.id;
 		priceDto.startDate = price.startDate;
 		priceDto.endDate = price.endDate;
 		priceDto.brandId = price.brand.id;
 		priceDto.priceList = price.priceList;
-		priceDto.priority = price.priority;
 		priceDto.currency = price.curr;
 		priceDto.productId = price.product.id;
 		priceDto.price = price.price;
