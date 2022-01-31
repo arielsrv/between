@@ -89,11 +89,11 @@ public class PriceControllerTest {
 
 	@Test
 	public void test_product_not_found() {
-		String url = this.apiUrl + "/prices/search?product_id=1?application_date=2020-06-16T21:00:00&brand_id=1";
+		String url = this.apiUrl + "/prices/search?product_id=1&application_date=2020-06-16T21:00:00&brand_id=1";
 		LinkedHashMap<String, Object> actual = this.testRestTemplate.getForObject(url, LinkedHashMap.class);
 
 		assertThat(actual).isNotNull();
-		assertThat(actual.get("status")).isEqualTo(400);
+		assertThat(actual.get("status")).isEqualTo(404);
 	}
 
 	@Test
