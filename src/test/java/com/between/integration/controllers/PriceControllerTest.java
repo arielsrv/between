@@ -87,6 +87,7 @@ public class PriceControllerTest {
 		assertThat(actual.price).isEqualTo("38.95");
 	}
 
+	@SuppressWarnings("unchecked")
 	@Test
 	public void test_product_not_found() {
 		String url = this.apiUrl + "/prices/search?product_id=1&application_date=2020-06-16T21:00:00&brand_id=1";
@@ -96,6 +97,8 @@ public class PriceControllerTest {
 		assertThat(actual.get("status")).isEqualTo(404);
 	}
 
+
+	@SuppressWarnings("unchecked")
 	@Test
 	public void test_brand_not_found() {
 		String url = this.apiUrl + "/prices/search?product_id=35455&application_date=2020-06-16T21:00:00&brand_id=5";
@@ -105,6 +108,7 @@ public class PriceControllerTest {
 		assertThat(actual.get("status")).isEqualTo(404);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Test
 	public void test_price_not_found() {
 		String url = this.apiUrl + "/prices/search?product_id=35455&application_date=2022-06-16T21:00:00&brand_id=1";
