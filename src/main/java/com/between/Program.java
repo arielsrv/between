@@ -13,6 +13,8 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.embedded.jetty.JettyServletWebServerFactory;
+import org.springframework.boot.web.servlet.server.ConfigurableServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 
@@ -21,6 +23,14 @@ public class Program {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Program.class, args);
+	}
+
+	@Bean
+	public ConfigurableServletWebServerFactory webServerFactory() {
+		JettyServletWebServerFactory jettyServletWebServerFactory = new JettyServletWebServerFactory();
+		jettyServletWebServerFactory.setPort(8080);
+		jettyServletWebServerFactory.setContextPath("");
+		return jettyServletWebServerFactory;
 	}
 
 	@Bean
