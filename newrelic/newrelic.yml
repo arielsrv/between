@@ -103,7 +103,7 @@ common: &default_settings
   # attributes can be found in transaction traces, traced errors, Insight's 
   # transaction events, and Insight's page views.
   attributes:
-
+  
     # When true, attributes will be sent to New Relic. The default is true.
     enabled: true
     
@@ -332,8 +332,8 @@ common: &default_settings
   # Names and values may not contain colons (:) or semicolons (;).
   labels:
 
-  # An example label
-  #label_name: label_value
+    # An example label
+    #label_name: label_value
 
 
 # Application Environments

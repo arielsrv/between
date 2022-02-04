@@ -4,6 +4,7 @@ import com.between.dtos.PriceDto;
 import com.between.entities.Brand;
 import com.between.entities.Price;
 import com.between.entities.Product;
+import com.between.exceptions.ApiBadRequestException;
 import com.between.exceptions.ApiNotFoundException;
 import com.between.repositories.BrandRepository;
 import com.between.repositories.PriceRepository;

@@ -15,6 +15,7 @@
 
     ./gradlew test jacocoTestReport
 
+
 ## Request
 
     curl 'https://between-challenge.herokuapp.com/prices/search?product_id=35455&application_date=2020-06-14T16:00:01&brand_id=1'
