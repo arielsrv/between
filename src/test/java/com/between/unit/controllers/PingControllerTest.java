@@ -10,7 +10,7 @@ public class PingControllerTest {
 	@Test
 	public void ping() {
 		PingController pingController = new PingController();
-		String actual = pingController.pong();
+		String actual = pingController.ping();
 
 		assertThat(actual).isNotNull();
 		assertThat(actual).isEqualTo("pong");

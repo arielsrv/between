@@ -10,7 +10,7 @@ public class PingController {
 
 	@RequestMapping(value = "/ping", method = RequestMethod.GET)
 	public @ResponseBody
-	String pong() {
+	String ping() {
 		return "pong";
 	}
 }
