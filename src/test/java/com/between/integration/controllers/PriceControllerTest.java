@@ -14,6 +14,7 @@ import java.util.LinkedHashMap;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+@SuppressWarnings("unchecked")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class PriceControllerTest {
 
@@ -107,7 +108,6 @@ public class PriceControllerTest {
 	@Test
 	public void test_product_not_found() {
 		String url = this.apiUrl + "/prices/search?product_id=1&application_date=2020-06-16T21:00:00&brand_id=1";
-		//noinspection unchecked
 		LinkedHashMap<String, Object> actual = this.testRestTemplate.getForObject(url, LinkedHashMap.class);
 
 		assertThat(actual).isNotNull();
@@ -117,7 +117,6 @@ public class PriceControllerTest {
 	@Test
 	public void test_brand_not_found() {
 		String url = this.apiUrl + "/prices/search?product_id=35455&application_date=2020-06-16T21:00:00&brand_id=5";
-		//noinspection unchecked
 		LinkedHashMap<String, Object> actual = this.testRestTemplate.getForObject(url, LinkedHashMap.class);
 
 		assertThat(actual).isNotNull();
@@ -127,7 +126,6 @@ public class PriceControllerTest {
 	@Test
 	public void test_price_not_found() {
 		String url = this.apiUrl + "/prices/search?product_id=35455&application_date=2022-06-16T21:00:00&brand_id=1";
-		//noinspection unchecked
 		LinkedHashMap<String, Object> actual = this.testRestTemplate.getForObject(url, LinkedHashMap.class);
 
 		assertThat(actual).isNotNull();
