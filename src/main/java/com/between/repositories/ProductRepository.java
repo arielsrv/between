@@ -22,4 +22,10 @@ public class ProductRepository {
 	public Optional<Product> getProduct(long productId) {
 		return this.productRepository.findById(productId);
 	}
+
+	public long create(Product product) {
+		return this.productRepository
+			.save(product)
+			.id;
+	}
 }
