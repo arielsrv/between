@@ -11,11 +11,15 @@ import com.fasterxml.jackson.databind.util.StdDateFormat;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
+import org.springframework.amqp.rabbit.annotation.EnableRabbit;
+import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
+import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 
+@EnableRabbit
 @SpringBootApplication
 public class Program {
 
@@ -48,4 +52,14 @@ public class Program {
 
 		return objectMapper;
 	}
+
+	@Bean
+	public ConnectionFactory connectionFactory() {
+		CachingConnectionFactory connectionFactory = new CachingConnectionFactory();
+		connectionFactory.setUri("amqps://gtgkxzbb:9YY_T1LViO2Y1cwvWis2JkxfpkPVQYaG@toad.rmq.cloudamqp.com/gtgkxzbb");
+		return connectionFactory;
+	}
 }
+
+
+
