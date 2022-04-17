@@ -1,6 +1,6 @@
 plugins {
     id 'application'
-    id 'org.springframework.boot' version '2.6.3'
+    id 'org.springframework.boot' version '2.6.6'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'com.github.ben-manes.versions' version '0.42.0'
     id 'java'
@@ -21,19 +21,12 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'io.springfox:springfox-boot-starter:3.0.0'
     implementation 'org.springframework.boot:spring-boot-starter-amqp'
-    // implementation ('org.springframework.boot:spring-boot-starter-data-elasticsearch') {
-    //     // exclude group: 'org.elasticsearch.client', module: 'elasticsearch-rest-client'
-    //     // exclude group: 'org.elasticsearch.client', module: 'elasticsearch-rest-high-level-client'
-    // }
-    // implementation 'org.elasticsearch.client:elasticsearch-rest-client:7.10.2'
-    // implementation 'org.elasticsearch.client:elasticsearch-rest-high-level-client:7.10.2'
-    // implementation 'co.elastic.clients:elasticsearch-java:7.16.3'
     implementation 'org.elasticsearch:elasticsearch:7.10.2'
     implementation 'org.elasticsearch.client:elasticsearch-rest-high-level-client:7.10.2'
     runtimeOnly 'mysql:mysql-connector-java'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation "org.mockito:mockito-core:4.3.1"
+    testImplementation "org.mockito:mockito-core:4.4.0"
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.amqp:spring-rabbit-test'
 }
