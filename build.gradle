@@ -7,10 +7,12 @@ plugins {
     id 'jacoco'
 }
 
-group = 'com.between'
-version = '0.0.1-SNAPSHOT'
-mainClassName = 'com.between.Program'
-sourceCompatibility = '11'
+application {
+    mainClass = 'com.between.Program'
+    sourceCompatibility = '11'
+    group = 'com.between'
+    version = '0.0.1-SNAPSHOT'
+}
 
 repositories {
     mavenCentral()
