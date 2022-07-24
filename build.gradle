@@ -9,7 +9,6 @@ plugins {
 
 application {
     mainClass = 'com.between.Program'
-    sourceCompatibility = '11'
     group = 'com.between'
     version = '0.0.1-SNAPSHOT'
 }

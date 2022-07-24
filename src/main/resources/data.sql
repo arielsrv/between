@@ -1,3 +1,5 @@
+-- noinspection SqlNoDataSourceInspectionForFile
+
 insert into products (id, title)
 values (35455, 'iPhone 12 Pro');
 insert into brands (id, title)
