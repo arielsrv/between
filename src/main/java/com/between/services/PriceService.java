@@ -8,12 +8,11 @@ import com.between.exceptions.ApiNotFoundException;
 import com.between.repositories.BrandRepository;
 import com.between.repositories.PriceRepository;
 import com.between.repositories.ProductRepository;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-
-import java.util.Optional;
 
 @Component
 @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
@@ -39,21 +38,21 @@ public class PriceService {
 		Optional<Product> product = this.productRepository
 			.getProduct(productId);
 
-		if (!product.isPresent()) {
+		if (product.isEmpty()) {
 			throw new ApiNotFoundException("Product not found. ");
 		}
 
 		Optional<Brand> brand = this.brandRepository
 			.getBrand(brandId);
 
-		if (!brand.isPresent()) {
+		if (brand.isEmpty()) {
 			throw new ApiNotFoundException("Brand not found. ");
 		}
 
 		Optional<Price> price = this.priceRepository
 			.getPrice(productId, brandId, applicationDate);
 
-		if (!price.isPresent()) {
+		if (price.isEmpty()) {
 			throw new ApiNotFoundException("Offer not found. ");
 		}
 
