@@ -1,7 +1,7 @@
 plugins {
     id 'application'
-    id 'org.springframework.boot' version '2.6.6'
-    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'org.springframework.boot' version '2.7.3'
+    id 'io.spring.dependency-management' version '1.0.13.RELEASE'
     id 'com.github.ben-manes.versions' version '0.42.0'
     id 'java'
     id 'jacoco'
@@ -26,7 +26,7 @@ dependencies {
     runtimeOnly 'mysql:mysql-connector-java'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation "org.mockito:mockito-core:4.4.0"
+    testImplementation "org.mockito:mockito-core:4.7.0"
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.amqp:spring-rabbit-test'
 }
@@ -41,7 +41,7 @@ jar {
 }
 
 jacoco {
-    toolVersion = "0.8.7"
+    toolVersion = "0.8.8"
     reportsDirectory = file("$buildDir/reports/jacoco")
 }
 
