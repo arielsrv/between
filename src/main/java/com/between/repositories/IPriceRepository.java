@@ -1,15 +1,14 @@
 package com.between.repositories;
 
 import com.between.entities.Price;
+import java.time.LocalDateTime;
+import java.util.Optional;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
-
-import java.time.LocalDateTime;
-import java.util.Optional;
 
 @Repository
 @Component
@@ -23,6 +22,7 @@ public interface IPriceRepository extends CrudRepository<Price, Long> {
 			"and price.start_date < :applicationDate and price.end_date > :applicationDate " +
 			"order by price.priority desc limit 1"
 	)
-	Optional<Price> getPriceByApplicationDate(long productId, long brandId, LocalDateTime applicationDate);
+	Optional<Price> getPriceByApplicationDate(long productId, long brandId,
+		LocalDateTime applicationDate);
 }
 

@@ -1,9 +1,9 @@
 package com.between.unit.controllers;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
 import com.between.controllers.PingController;
 import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class PingControllerTest {
 

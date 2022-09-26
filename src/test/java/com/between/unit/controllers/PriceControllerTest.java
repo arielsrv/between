@@ -1,16 +1,16 @@
 package com.between.unit.controllers;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import com.between.controllers.PriceController;
 import com.between.dtos.PriceDto;
 import com.between.exceptions.ApiNotFoundException;
 import com.between.services.PriceService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class PriceControllerTest {
 
@@ -36,7 +36,8 @@ public class PriceControllerTest {
 		when(this.priceService.getPrice(1L, "2022-06-14T10:00:00", 1L))
 			.thenThrow(new ApiNotFoundException("Price not found. "));
 
-		assertThrows(ApiNotFoundException.class, () -> this.priceController.getPrice(1L, "2022-06-14T10:00:00", 1L));
+		assertThrows(ApiNotFoundException.class,
+			() -> this.priceController.getPrice(1L, "2022-06-14T10:00:00", 1L));
 	}
 
 	private PriceDto getItem() {

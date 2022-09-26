@@ -1,5 +1,10 @@
 package com.between.unit.services;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import com.between.dtos.PriceDto;
 import com.between.entities.Brand;
 import com.between.entities.Currency;
@@ -10,16 +15,10 @@ import com.between.repositories.BrandRepository;
 import com.between.repositories.PriceRepository;
 import com.between.repositories.ProductRepository;
 import com.between.services.PriceService;
+import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.Optional;
-
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 @SpringBootTest
 public class PriceServiceTest {
@@ -55,9 +54,11 @@ public class PriceServiceTest {
 	public void get_price_not_found() {
 		when(this.productRepository.getProduct(1L)).thenReturn(getProduct());
 		when(this.brandRepository.getBrand(1L)).thenReturn(getBrand());
-		when(this.priceRepository.getPrice(1L, 1L, "2020-06-14T16:00:00")).thenThrow(new ApiNotFoundException("Price not found. "));
+		when(this.priceRepository.getPrice(1L, 1L, "2020-06-14T16:00:00")).thenThrow(
+			new ApiNotFoundException("Price not found. "));
 
-		assertThrows(ApiNotFoundException.class, () -> this.priceService.getPrice(1L, "2020-06-14T16:00:00", 1L));
+		assertThrows(ApiNotFoundException.class,
+			() -> this.priceService.getPrice(1L, "2020-06-14T16:00:00", 1L));
 	}
 
 	private Optional<Price> getPrice() {
