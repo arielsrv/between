@@ -11,9 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.boot.test.web.server.LocalServerPort;
 
-@SuppressWarnings("unchecked")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class PriceControllerTest {
 
@@ -113,7 +112,7 @@ public class PriceControllerTest {
 	public void test_product_not_found() {
 		String url = this.apiUrl
 			+ "/prices/search?product_id=1&application_date=2020-06-16T21:00:00&brand_id=1";
-		LinkedHashMap<String, Object> actual = this.testRestTemplate.getForObject(url,
+		LinkedHashMap actual = this.testRestTemplate.getForObject(url,
 			LinkedHashMap.class);
 
 		assertThat(actual).isNotNull();
@@ -124,7 +123,7 @@ public class PriceControllerTest {
 	public void test_brand_not_found() {
 		String url = this.apiUrl
 			+ "/prices/search?product_id=35455&application_date=2020-06-16T21:00:00&brand_id=5";
-		LinkedHashMap<String, Object> actual = this.testRestTemplate.getForObject(url,
+		LinkedHashMap actual = this.testRestTemplate.getForObject(url,
 			LinkedHashMap.class);
 
 		assertThat(actual).isNotNull();
@@ -135,7 +134,7 @@ public class PriceControllerTest {
 	public void test_price_not_found() {
 		String url = this.apiUrl
 			+ "/prices/search?product_id=35455&application_date=2022-06-16T21:00:00&brand_id=1";
-		LinkedHashMap<String, Object> actual = this.testRestTemplate.getForObject(url,
+		LinkedHashMap actual = this.testRestTemplate.getForObject(url,
 			LinkedHashMap.class);
 
 		assertThat(actual).isNotNull();
