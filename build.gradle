@@ -1,3 +1,19 @@
+buildscript {
+    repositories {
+        mavenCentral {
+            metadataSources {
+                mavenPom()
+                artifact()
+                ignoreGradleMetadataRedirection()
+            }
+        }
+    }
+
+    dependencies {
+        classpath 'org.owasp:dependency-check-gradle:7.3.2'
+    }
+}
+
 plugins {
     id 'application'
     id 'org.springframework.boot' version '3.0.0'
@@ -45,6 +61,10 @@ jacoco {
     toolVersion = "0.8.8"
     reportsDirectory = file("$buildDir/reports/jacoco")
 }
+
+
+
+apply plugin: 'org.owasp.dependencycheck'
 
 jacocoTestReport { // ./gradlew test jacocoTestReport from CLI
     dependsOn test // tests are required to run before generating the report
