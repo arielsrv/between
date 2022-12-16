@@ -36,7 +36,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'net.bytebuddy:byte-buddy:1.12.20'
-    testImplementation "org.mockito:mockito-core:4.9.0"
+    testImplementation "org.mockito:mockito-core:4.10.0"
 }
 
 test {
