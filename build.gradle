@@ -1,7 +1,7 @@
 plugins {
     id 'application'
     id 'org.springframework.boot' version '3.4.1'
-    id 'io.spring.dependency-management' version '1.1.6'
+    id 'io.spring.dependency-management' version '1.1.7'
     id 'com.github.ben-manes.versions' version '0.51.0'
     id 'java'
     id 'jacoco'
@@ -33,10 +33,10 @@ dependencies {
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'com.h2database:h2:2.3.232'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-    annotationProcessor 'org.projectlombok:lombok:1.18.34'
+    annotationProcessor 'org.projectlombok:lombok:1.18.36'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'net.bytebuddy:byte-buddy:1.15.10'
-    testImplementation "org.mockito:mockito-core:5.14.2"
+    testImplementation 'net.bytebuddy:byte-buddy:1.15.11'
+    testImplementation "org.mockito:mockito-core:5.15.2"
 }
 
 test {
