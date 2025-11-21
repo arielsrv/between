@@ -11,29 +11,29 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestClient;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class PriceControllerTest {
 
 	@LocalServerPort
 	private int port;
-	@Autowired
-	private TestRestTemplate testRestTemplate;
-	private String apiUrl;
+ private RestClient restClient;
+ private String apiUrl;
 
 	@BeforeEach
-	public void setUp() {
-		this.apiUrl = String.format("http://localhost:%d", port);
-	}
+ public void setUp() {
+        this.apiUrl = String.format("http://localhost:%d", port);
+        this.restClient = RestClient.builder().baseUrl(this.apiUrl).build();
+    }
 
 	@Test
 	@Tag("challenge")
 	public void test_1() {
-		String url = this.apiUrl
-			+ "/prices/search?product_id=35455&application_date=2020-06-14T10:00:00&brand_id=1";
-		PriceDto actual = this.testRestTemplate.getForObject(url, PriceDto.class);
+  String url = "/prices/search?product_id=35455&application_date=2020-06-14T10:00:00&brand_id=1";
+        PriceDto actual = this.restClient.get().uri(url).retrieve().body(PriceDto.class);
 
 		assertThat(actual).isNotNull();
 		// assertThat(actual.productId).isEqualTo(35455L);
@@ -47,9 +47,8 @@ public class PriceControllerTest {
 	@Test
 	@Tag("challenge")
 	public void test_2() {
-		String url = "%s/prices/search?product_id=35455&application_date=2020-06-14T16:00:00&brand_id=1".formatted(
-			this.apiUrl);
-		PriceDto actual = this.testRestTemplate.getForObject(url, PriceDto.class);
+  String url = "/prices/search?product_id=35455&application_date=2020-06-14T16:00:00&brand_id=1";
+        PriceDto actual = this.restClient.get().uri(url).retrieve().body(PriceDto.class);
 
 		assertThat(actual).isNotNull();
 		// assertThat(actual.productId).isEqualTo(35455L);
@@ -63,9 +62,8 @@ public class PriceControllerTest {
 	@Test
 	@Tag("challenge")
 	public void test_3() {
-		String url = "%s/prices/search?product_id=35455&application_date=2020-06-14T21:00:00&brand_id=1".formatted(
-			this.apiUrl);
-		PriceDto actual = this.testRestTemplate.getForObject(url, PriceDto.class);
+  String url = "/prices/search?product_id=35455&application_date=2020-06-14T21:00:00&brand_id=1";
+        PriceDto actual = this.restClient.get().uri(url).retrieve().body(PriceDto.class);
 
 		assertThat(actual).isNotNull();
 		// assertThat(actual.productId).isEqualTo(35455L);
@@ -79,9 +77,8 @@ public class PriceControllerTest {
 	@Test
 	@Tag("challenge")
 	public void test_4() {
-		String url = "%s/prices/search?product_id=35455&application_date=2020-06-15T10:00:00&brand_id=1".formatted(
-			this.apiUrl);
-		PriceDto actual = this.testRestTemplate.getForObject(url, PriceDto.class);
+  String url = "/prices/search?product_id=35455&application_date=2020-06-15T10:00:00&brand_id=1";
+        PriceDto actual = this.restClient.get().uri(url).retrieve().body(PriceDto.class);
 
 		assertThat(actual).isNotNull();
 		// assertThat(actual.productId).isEqualTo(35455L);
@@ -95,9 +92,8 @@ public class PriceControllerTest {
 	@Test
 	@Tag("challenge")
 	public void test_5() {
-		String url = "%s/prices/search?product_id=35455&application_date=2020-06-16T21:00:00&brand_id=1".formatted(
-			this.apiUrl);
-		PriceDto actual = this.testRestTemplate.getForObject(url, PriceDto.class);
+  String url = "/prices/search?product_id=35455&application_date=2020-06-16T21:00:00&brand_id=1";
+        PriceDto actual = this.restClient.get().uri(url).retrieve().body(PriceDto.class);
 
 		assertThat(actual).isNotNull();
 		// assertThat(actual.productId).isEqualTo(35455L);
@@ -110,42 +106,38 @@ public class PriceControllerTest {
 
 	@Test
 	public void test_product_not_found() {
-		String url = "%s/prices/search?product_id=1&application_date=2020-06-16T21:00:00&brand_id=1".formatted(
-			this.apiUrl);
-		LinkedHashMap actual = this.testRestTemplate.getForObject(url,
-			LinkedHashMap.class);
+  String url = "/prices/search?product_id=1&application_date=2020-06-16T21:00:00&brand_id=1";
+        ResponseEntity<LinkedHashMap> response = this.restClient.get().uri(url).retrieve().toEntity(LinkedHashMap.class);
+        LinkedHashMap actual = response.getBody();
 
 		assertThat(actual).isNotNull();
-		assertThat(actual.get("status")).isEqualTo(404);
+  assertThat(response.getStatusCode().value()).isEqualTo(404);
 	}
 
 	@Test
 	public void test_brand_not_found() {
-		String url = "%s/prices/search?product_id=35455&application_date=2020-06-16T21:00:00&brand_id=5".formatted(
-			this.apiUrl);
-		LinkedHashMap actual = this.testRestTemplate.getForObject(url,
-			LinkedHashMap.class);
+  String url = "/prices/search?product_id=35455&application_date=2020-06-16T21:00:00&brand_id=5";
+        ResponseEntity<LinkedHashMap> response = this.restClient.get().uri(url).retrieve().toEntity(LinkedHashMap.class);
+        LinkedHashMap actual = response.getBody();
 
 		assertThat(actual).isNotNull();
-		assertThat(actual.get("status")).isEqualTo(404);
+  assertThat(response.getStatusCode().value()).isEqualTo(404);
 	}
 
 	@Test
 	public void test_price_not_found() {
-		String url = "%s/prices/search?product_id=35455&application_date=2022-06-16T21:00:00&brand_id=1".formatted(
-			this.apiUrl);
-		LinkedHashMap actual = this.testRestTemplate.getForObject(url,
-			LinkedHashMap.class);
+  String url = "/prices/search?product_id=35455&application_date=2022-06-16T21:00:00&brand_id=1";
+        ResponseEntity<LinkedHashMap> response = this.restClient.get().uri(url).retrieve().toEntity(LinkedHashMap.class);
+        LinkedHashMap actual = response.getBody();
 
 		assertThat(actual).isNotNull();
-		assertThat(actual.get("status")).isEqualTo(404);
+  assertThat(response.getStatusCode().value()).isEqualTo(404);
 	}
 
 	@Test
 	public void get_foo() {
-		String url = "%s/prices/search?product_id=35455&application_date=2020-06-16T21:00:00&brand_id=1".formatted(
-			this.apiUrl);
-		PriceDto actual = this.testRestTemplate.getForObject(url, PriceDto.class);
+  String url = "/prices/search?product_id=35455&application_date=2020-06-16T21:00:00&brand_id=1";
+        PriceDto actual = this.restClient.get().uri(url).retrieve().body(PriceDto.class);
 
 		assertThat(actual).isNotNull();
 	}
