@@ -56,7 +56,7 @@ jar {
 
 jacoco {
     toolVersion = "0.8.12"
-    reportsDirectory = file("$buildDir/reports/jacoco")
+    reportsDirectory = layout.buildDirectory.dir("reports/jacoco")
 }
 
 jacocoTestReport {
