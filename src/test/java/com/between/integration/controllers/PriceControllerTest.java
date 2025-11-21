@@ -1,39 +1,39 @@
 package com.between.integration.controllers;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-
 import com.between.dtos.PriceDto;
-import java.time.LocalDateTime;
-import java.util.LinkedHashMap;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestClient;
+
+import java.time.LocalDateTime;
+import java.util.LinkedHashMap;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class PriceControllerTest {
 
 	@LocalServerPort
 	private int port;
- private RestClient restClient;
- private String apiUrl;
+	private RestClient restClient;
+	private String apiUrl;
 
 	@BeforeEach
- public void setUp() {
-        this.apiUrl = String.format("http://localhost:%d", port);
-        this.restClient = RestClient.builder().baseUrl(this.apiUrl).build();
-    }
+	public void setUp() {
+		this.apiUrl = String.format("http://localhost:%d", port);
+		this.restClient = RestClient.builder().baseUrl(this.apiUrl).build();
+	}
 
 	@Test
 	@Tag("challenge")
 	public void test_1() {
-  String url = "/prices/search?product_id=35455&application_date=2020-06-14T10:00:00&brand_id=1";
-        PriceDto actual = this.restClient.get().uri(url).retrieve().body(PriceDto.class);
+		String url = "/prices/search?product_id=35455&application_date=2020-06-14T10:00:00&brand_id=1";
+		PriceDto actual = this.restClient.get().uri(url).retrieve().body(PriceDto.class);
 
 		assertThat(actual).isNotNull();
 		// assertThat(actual.productId).isEqualTo(35455L);
@@ -47,8 +47,8 @@ public class PriceControllerTest {
 	@Test
 	@Tag("challenge")
 	public void test_2() {
-  String url = "/prices/search?product_id=35455&application_date=2020-06-14T16:00:00&brand_id=1";
-        PriceDto actual = this.restClient.get().uri(url).retrieve().body(PriceDto.class);
+		String url = "/prices/search?product_id=35455&application_date=2020-06-14T16:00:00&brand_id=1";
+		PriceDto actual = this.restClient.get().uri(url).retrieve().body(PriceDto.class);
 
 		assertThat(actual).isNotNull();
 		// assertThat(actual.productId).isEqualTo(35455L);
@@ -62,8 +62,8 @@ public class PriceControllerTest {
 	@Test
 	@Tag("challenge")
 	public void test_3() {
-  String url = "/prices/search?product_id=35455&application_date=2020-06-14T21:00:00&brand_id=1";
-        PriceDto actual = this.restClient.get().uri(url).retrieve().body(PriceDto.class);
+		String url = "/prices/search?product_id=35455&application_date=2020-06-14T21:00:00&brand_id=1";
+		PriceDto actual = this.restClient.get().uri(url).retrieve().body(PriceDto.class);
 
 		assertThat(actual).isNotNull();
 		// assertThat(actual.productId).isEqualTo(35455L);
@@ -77,8 +77,8 @@ public class PriceControllerTest {
 	@Test
 	@Tag("challenge")
 	public void test_4() {
-  String url = "/prices/search?product_id=35455&application_date=2020-06-15T10:00:00&brand_id=1";
-        PriceDto actual = this.restClient.get().uri(url).retrieve().body(PriceDto.class);
+		String url = "/prices/search?product_id=35455&application_date=2020-06-15T10:00:00&brand_id=1";
+		PriceDto actual = this.restClient.get().uri(url).retrieve().body(PriceDto.class);
 
 		assertThat(actual).isNotNull();
 		// assertThat(actual.productId).isEqualTo(35455L);
@@ -92,8 +92,8 @@ public class PriceControllerTest {
 	@Test
 	@Tag("challenge")
 	public void test_5() {
-  String url = "/prices/search?product_id=35455&application_date=2020-06-16T21:00:00&brand_id=1";
-        PriceDto actual = this.restClient.get().uri(url).retrieve().body(PriceDto.class);
+		String url = "/prices/search?product_id=35455&application_date=2020-06-16T21:00:00&brand_id=1";
+		PriceDto actual = this.restClient.get().uri(url).retrieve().body(PriceDto.class);
 
 		assertThat(actual).isNotNull();
 		// assertThat(actual.productId).isEqualTo(35455L);
@@ -104,40 +104,44 @@ public class PriceControllerTest {
 		assertThat(actual.endDate).isEqualTo(LocalDateTime.parse("2020-12-31T23:59:59"));
 	}
 
-	@Test
-	public void test_product_not_found() {
+    @Test
+    public void test_product_not_found() {
   String url = "/prices/search?product_id=1&application_date=2020-06-16T21:00:00&brand_id=1";
-        ResponseEntity<LinkedHashMap> response = this.restClient.get().uri(url).retrieve().toEntity(LinkedHashMap.class);
-        LinkedHashMap actual = response.getBody();
+        try {
+            this.restClient.get().uri(url).retrieve().toEntity(LinkedHashMap.class);
+            // Si no lanza excepción, el test debe fallar
+            throw new AssertionError("Se esperaba HTTP 404, pero la solicitud fue exitosa");
+        } catch (org.springframework.web.client.HttpClientErrorException e) {
+            assertThat(e.getStatusCode().value()).isEqualTo(404);
+        }
+    }
 
-		assertThat(actual).isNotNull();
-  assertThat(response.getStatusCode().value()).isEqualTo(404);
-	}
-
-	@Test
-	public void test_brand_not_found() {
+    @Test
+    public void test_brand_not_found() {
   String url = "/prices/search?product_id=35455&application_date=2020-06-16T21:00:00&brand_id=5";
-        ResponseEntity<LinkedHashMap> response = this.restClient.get().uri(url).retrieve().toEntity(LinkedHashMap.class);
-        LinkedHashMap actual = response.getBody();
+        try {
+            this.restClient.get().uri(url).retrieve().toEntity(LinkedHashMap.class);
+            throw new AssertionError("Se esperaba HTTP 404, pero la solicitud fue exitosa");
+        } catch (org.springframework.web.client.HttpClientErrorException e) {
+            assertThat(e.getStatusCode().value()).isEqualTo(404);
+        }
+    }
 
-		assertThat(actual).isNotNull();
-  assertThat(response.getStatusCode().value()).isEqualTo(404);
-	}
-
-	@Test
-	public void test_price_not_found() {
+    @Test
+    public void test_price_not_found() {
   String url = "/prices/search?product_id=35455&application_date=2022-06-16T21:00:00&brand_id=1";
-        ResponseEntity<LinkedHashMap> response = this.restClient.get().uri(url).retrieve().toEntity(LinkedHashMap.class);
-        LinkedHashMap actual = response.getBody();
-
-		assertThat(actual).isNotNull();
-  assertThat(response.getStatusCode().value()).isEqualTo(404);
-	}
+        try {
+            this.restClient.get().uri(url).retrieve().toEntity(LinkedHashMap.class);
+            throw new AssertionError("Se esperaba HTTP 404, pero la solicitud fue exitosa");
+        } catch (org.springframework.web.client.HttpClientErrorException e) {
+            assertThat(e.getStatusCode().value()).isEqualTo(404);
+        }
+    }
 
 	@Test
 	public void get_foo() {
-  String url = "/prices/search?product_id=35455&application_date=2020-06-16T21:00:00&brand_id=1";
-        PriceDto actual = this.restClient.get().uri(url).retrieve().body(PriceDto.class);
+		String url = "/prices/search?product_id=35455&application_date=2020-06-16T21:00:00&brand_id=1";
+		PriceDto actual = this.restClient.get().uri(url).retrieve().body(PriceDto.class);
 
 		assertThat(actual).isNotNull();
 	}
