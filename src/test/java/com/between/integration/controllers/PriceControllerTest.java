@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestClient;
 
 import java.time.LocalDateTime;
@@ -104,39 +103,39 @@ public class PriceControllerTest {
 		assertThat(actual.endDate).isEqualTo(LocalDateTime.parse("2020-12-31T23:59:59"));
 	}
 
-    @Test
-    public void test_product_not_found() {
-  String url = "/prices/search?product_id=1&application_date=2020-06-16T21:00:00&brand_id=1";
-        try {
-            this.restClient.get().uri(url).retrieve().toEntity(LinkedHashMap.class);
-            // Si no lanza excepción, el test debe fallar
-            throw new AssertionError("Se esperaba HTTP 404, pero la solicitud fue exitosa");
-        } catch (org.springframework.web.client.HttpClientErrorException e) {
-            assertThat(e.getStatusCode().value()).isEqualTo(404);
-        }
-    }
+	@Test
+	public void test_product_not_found() {
+		String url = "/prices/search?product_id=1&application_date=2020-06-16T21:00:00&brand_id=1";
+		try {
+			this.restClient.get().uri(url).retrieve().toEntity(LinkedHashMap.class);
+			// Si no lanza excepción, el test debe fallar
+			throw new AssertionError("Se esperaba HTTP 404, pero la solicitud fue exitosa");
+		} catch (org.springframework.web.client.HttpClientErrorException e) {
+			assertThat(e.getStatusCode().value()).isEqualTo(404);
+		}
+	}
 
-    @Test
-    public void test_brand_not_found() {
-  String url = "/prices/search?product_id=35455&application_date=2020-06-16T21:00:00&brand_id=5";
-        try {
-            this.restClient.get().uri(url).retrieve().toEntity(LinkedHashMap.class);
-            throw new AssertionError("Se esperaba HTTP 404, pero la solicitud fue exitosa");
-        } catch (org.springframework.web.client.HttpClientErrorException e) {
-            assertThat(e.getStatusCode().value()).isEqualTo(404);
-        }
-    }
+	@Test
+	public void test_brand_not_found() {
+		String url = "/prices/search?product_id=35455&application_date=2020-06-16T21:00:00&brand_id=5";
+		try {
+			this.restClient.get().uri(url).retrieve().toEntity(LinkedHashMap.class);
+			throw new AssertionError("Se esperaba HTTP 404, pero la solicitud fue exitosa");
+		} catch (org.springframework.web.client.HttpClientErrorException e) {
+			assertThat(e.getStatusCode().value()).isEqualTo(404);
+		}
+	}
 
-    @Test
-    public void test_price_not_found() {
-  String url = "/prices/search?product_id=35455&application_date=2022-06-16T21:00:00&brand_id=1";
-        try {
-            this.restClient.get().uri(url).retrieve().toEntity(LinkedHashMap.class);
-            throw new AssertionError("Se esperaba HTTP 404, pero la solicitud fue exitosa");
-        } catch (org.springframework.web.client.HttpClientErrorException e) {
-            assertThat(e.getStatusCode().value()).isEqualTo(404);
-        }
-    }
+	@Test
+	public void test_price_not_found() {
+		String url = "/prices/search?product_id=35455&application_date=2022-06-16T21:00:00&brand_id=1";
+		try {
+			this.restClient.get().uri(url).retrieve().toEntity(LinkedHashMap.class);
+			throw new AssertionError("Se esperaba HTTP 404, pero la solicitud fue exitosa");
+		} catch (org.springframework.web.client.HttpClientErrorException e) {
+			assertThat(e.getStatusCode().value()).isEqualTo(404);
+		}
+	}
 
 	@Test
 	public void get_foo() {
