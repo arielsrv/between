@@ -27,7 +27,7 @@ public class Program {
 	@Primary
 	public ObjectMapper objectMapper() {
 		ObjectMapper objectMapper = new ObjectMapper();
-		objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+		objectMapper.setDefaultPropertyInclusion(JsonInclude.Include.NON_NULL);
 		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		objectMapper.setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE);
 		objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
