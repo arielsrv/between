@@ -13,7 +13,11 @@ application {
     version = '0.0.1-SNAPSHOT'
 }
 
-sourceCompatibility = 17
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
 
 configurations {
     compileOnly {
@@ -53,20 +57,22 @@ jacoco {
     reportsDirectory = file("$buildDir/reports/jacoco")
 }
 
-jacocoTestReport { // ./gradlew test jacocoTestReport from CLI
-    dependsOn test // tests are required to run before generating the report
+jacocoTestReport {
+    dependsOn test
     group = "Reporting"
+
     reports {
         xml.required.set(true)
         csv.required.set(true)
-        html.destination file("${buildDir}/reports/coverage")
+        html.outputLocation.set(layout.buildDirectory.dir("reports/coverage"))
     }
 
-    afterEvaluate {
-        classDirectories.setFrom(files(classDirectories.files.collect {
-            fileTree(dir: it, exclude: [
-                    '**/between/Program.*',
-            ])
-        }))
-    }
+    classDirectories.setFrom(
+            files(classDirectories.files.collect {
+                fileTree(dir: it, exclude: [
+                        '**/between/Program.*',
+                ])
+            })
+    )
 }
+
