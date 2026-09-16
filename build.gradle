@@ -37,7 +37,7 @@ dependencies {
     implementation 'com.fasterxml.jackson.module:jackson-module-parameter-names'
     implementation 'org.apache.groovy:groovy'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    runtimeOnly 'com.h2database:h2:2.4.240'
+    runtimeOnly 'com.h2database:h2:2.5.250'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor 'org.projectlombok:lombok:1.18.46'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
